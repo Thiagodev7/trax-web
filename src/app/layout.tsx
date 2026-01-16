@@ -1,8 +1,9 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
-import { Inter } from "next/font/google"; // Fonte padrão SaaS limpo
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { AppProvider } from "@/providers/app-provider";
+import { ThemeProvider } from "@/providers/theme-provider"; // Importe aqui
 import { cn } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
@@ -18,14 +19,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning> 
+      {/* suppressHydrationWarning é necessário para next-themes evitar erros no html tag */}
       <body className={cn(
         "min-h-screen bg-background font-sans antialiased", 
         inter.variable
       )}>
-        <AppProvider>
-          {children}
-        </AppProvider>
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+          <AppProvider>
+            {children}
+          </AppProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

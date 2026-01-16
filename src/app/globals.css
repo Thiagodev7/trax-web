@@ -123,3 +123,29 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  /* Padrão de Pontos (Dot Pattern) para o fundo */
+  .bg-dot-pattern {
+    background-image: radial-gradient(circle, #333333 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .dark .bg-dot-pattern {
+    background-image: radial-gradient(circle, #333333 1px, transparent 1px);
+  }
+  .light .bg-dot-pattern {
+    background-image: radial-gradient(circle, #e5e7eb 1px, transparent 1px);
+  }
+
+  /* Animação suave para o gradiente */
+  .animate-gradient {
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+  }
+
+  @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+}
